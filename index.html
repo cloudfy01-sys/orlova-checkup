@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
-<script src="data.js"></script>
+<script>document.write('<script src="data.js?v=' + Date.now() + '"><\/script>')</script>
 <style>
 :root{
   --bg:#120b08; --text:#fbf3e8; --muted:#bfa892; --line:rgba(236,194,122,.16); --line2:rgba(255,255,255,.07);
@@ -289,6 +289,7 @@ html,body{margin:0;background:var(--bg);color:var(--text);font-family:Manrope,sy
 <div class="toast" id="toast"></div>
 
 <script>
+setTimeout(() => document.getElementById('splash').classList.add('out'), 2300);  // заставка уходит в любом случае
 const tg = window.Telegram && Telegram.WebApp;
 const D = window.DATA;
 const user = tg && tg.initDataUnsafe && tg.initDataUnsafe.user;
@@ -301,7 +302,6 @@ if (tg) {
   tg.BackButton.onClick(() => back());
 }
 document.querySelectorAll('.uname').forEach(e => e.textContent = user ? user.first_name : 'дорогая гостья');
-setTimeout(() => document.getElementById('splash').classList.add('out'), 2300);
 
 // звёзды
 const st = document.getElementById('stars');
