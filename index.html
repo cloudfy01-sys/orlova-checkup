@@ -52,8 +52,8 @@ p{margin:0}
 
 /* шапка с фото */
 .hero{position:relative;height:min(68vh,520px);overflow:hidden}
-.hero img{width:100%;height:100%;object-fit:cover;object-position:50% 30%;display:block;transform:scale(1.04);animation:settle 1.6s ease-out forwards}
-@keyframes settle{to{transform:scale(1)}}
+.hero img{width:100%;height:100%;object-fit:cover;object-position:50% 30%;display:block;animation:settle 1.6s ease-out;will-change:transform}
+@keyframes settle{from{transform:scale(1.05)}to{transform:scale(1)}}
 .hero:after{content:"";position:absolute;inset:auto 0 0 0;height:55%;background:linear-gradient(to top,var(--bg) 8%,rgba(36,28,23,0))}
 .hero .cap{position:absolute;left:var(--pad);right:var(--pad);bottom:22px;z-index:1}
 .hero .cap .label{color:#d8cbbd}
@@ -145,6 +145,53 @@ p{margin:0}
   transform:translateY(-140%);transition:transform .3s ease-out}
 .toast.on{transform:none}
 .credit{font-size:11px;color:var(--faint);padding:28px var(--pad) 0}
+
+/* послание дня */
+.daily{margin:40px var(--pad) 0;padding:22px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);cursor:pointer}
+.daily .mantra{margin-top:12px}
+.daily .meta{display:flex;justify-content:space-between;margin-top:14px;font-size:12.5px;color:var(--faint)}
+
+/* отсчёт до ярмарки */
+.count{display:flex;gap:22px;margin-top:18px}
+.count div{min-width:46px}
+.count b{display:block;font:600 34px/1 var(--serif);font-variant-numeric:tabular-nums}
+.count span{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+
+/* дыхание */
+.breath{height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px;padding:var(--pad);text-align:center}
+.orb{width:200px;height:200px;position:relative;display:grid;place-items:center}
+.orb i{position:absolute;inset:0;border-radius:50%;border:1px solid var(--accent);transform:scale(.55);transition:transform 4s ease-in-out}
+.orb i:nth-child(2){border-color:var(--line);transition-delay:.15s}
+.orb.inhale i{transform:scale(1)}
+.orb b{font:500 24px var(--serif);position:relative}
+.breath .timer{font-variant-numeric:tabular-nums;color:var(--muted);font-size:13px;letter-spacing:.14em}
+
+/* волна семи уровней */
+.wave{margin:18px var(--pad) 0}
+.wave svg{width:100%;height:auto;display:block;overflow:visible}
+.wave .grid{fill:none;stroke:var(--line);stroke-width:1}
+.wave .shape{fill:rgba(194,160,107,.14);stroke:var(--accent);stroke-width:1.5;stroke-linejoin:round;stroke-dasharray:900;stroke-dashoffset:900;
+  animation:trace 1.4s .2s ease-out forwards}
+.wave .shape.f{animation:fillin .6s 1.2s ease-out both}
+.wave text{font:500 11px var(--sans);fill:var(--muted)}
+.wave .weak{fill:var(--weak)}
+@keyframes trace{to{stroke-dashoffset:0}}
+@keyframes fillin{from{fill-opacity:0}}
+
+/* админка */
+.kpi{display:grid;grid-template-columns:1fr 1fr;margin:22px var(--pad) 0;border-top:1px solid var(--line)}
+.kpi div{padding:16px 0;border-bottom:1px solid var(--line)}
+.kpi div:nth-child(odd){padding-right:14px;border-right:1px solid var(--line)}.kpi div:nth-child(even){padding-left:16px}
+.kpi b{display:block;font:600 34px/1.1 var(--serif);font-variant-numeric:tabular-nums}
+.kpi small{font-size:12px;color:var(--muted)}
+.funnel{margin:0 var(--pad)}
+.fstep{display:grid;grid-template-columns:1fr auto;gap:6px;padding:10px 0}
+.fstep .track{grid-column:1/3;height:3px;background:var(--line)}.fstep .track i{display:block;height:100%;width:0;background:var(--accent);transition:width .8s ease-out}
+.table{margin:0 var(--pad);font-size:13.5px;font-variant-numeric:tabular-nums}
+.table .tr{display:grid;grid-template-columns:1fr 40px 40px 40px 44px;gap:6px;padding:11px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.table .tr span{text-align:right}.table .th{color:var(--faint);font-size:11px;letter-spacing:.08em;text-transform:uppercase;border-top:1px solid var(--line)}
+.table .tr b{font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.copy{font-size:12.5px;color:var(--accent);cursor:pointer;margin-left:8px}
 @media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 </style>
 </head>
@@ -156,6 +203,7 @@ p{margin:0}
   <symbol id="i-lock" viewBox="0 0 16 16"><rect x="3" y="7" width="10" height="7" rx="1.5"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2"/></symbol>
   <symbol id="i-home" viewBox="0 0 24 24"><path d="M4 11l8-6 8 6v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></symbol>
   <symbol id="i-list" viewBox="0 0 24 24"><path d="M8 7h12M8 12h12M8 17h12M4 7h.01M4 12h.01M4 17h.01"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M21 20H3"/></symbol>
   <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="3.5"/><path d="M5 20c1.2-3.6 3.8-5 7-5s5.8 1.4 7 5"/></symbol>
 </svg>
 
@@ -167,6 +215,8 @@ p{margin:0}
   <div class="intro in" style="--d:.1s"><p><span class="uname">Здравствуйте</span>. Начните с волнового чекапа: 7 вопросов, около трёх минут. В конце вы увидите, где у вас больше всего сил и куда они уходят.</p>
     <div class="stack"><button class="btn" data-go="quiz">Пройти чекап бесплатно</button></div></div>
 
+  <div class="daily in" style="--d:.15s" id="daily"></div>
+
   <div class="section in" style="--d:.2s"><span class="label">Бесплатно</span>
     <div class="list">
       <div class="item" data-go="gift"><span class="n">01</span><b>Практика в подарок</b><span class="r"><svg class="arrow"><use href="#i-arrow"/></svg></span><small>Заземление, пять минут</small></div>
@@ -177,6 +227,7 @@ p{margin:0}
   <div class="section in" style="--d:.28s"><span class="label">20–22 ноября</span>
     <div class="wrap"><h2>Предновогодняя ярмарка исполнения желаний</h2>
       <p class="muted" style="margin-top:10px">Ретрит на три дня. Посмотрим, что стоит между вами и вашим желанием, и разрешим себе хотеть для себя.</p>
+      <div class="count" id="count"></div>
       <button class="btn text" data-svc="fair">Подробнее о ярмарке <svg class="arrow" style="stroke:var(--accent);margin-left:6px"><use href="#i-arrow"/></svg></button></div></div>
 </section>
 
@@ -206,6 +257,10 @@ p{margin:0}
 </section>
 <section class="screen" id="calc"><div class="calc"><svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="36"/></svg><p id="ctext"></p></div></section>
 <section class="screen" id="result"></section>
+<section class="screen" id="breath"><div class="breath"><span class="label">Практика · одна минута</span>
+  <div class="orb" id="orb"><i></i><i></i><b id="btext">Приготовьтесь</b></div>
+  <div class="timer" id="btimer">01:00</div><button class="btn line" style="max-width:200px" onclick="stopBreath()">Завершить</button></div></section>
+<section class="screen" id="admin"></section>
 <section class="screen" id="page"></section>
 </div>
 
@@ -213,6 +268,7 @@ p{margin:0}
   <button class="tab on" data-t="home"><svg><use href="#i-home"/></svg>Главная</button>
   <button class="tab" data-t="services"><svg><use href="#i-list"/></svg>Услуги</button>
   <button class="tab" data-t="profile"><svg><use href="#i-user"/></svg>Профиль</button>
+  <button class="tab" data-t="admin" id="admintab" hidden><svg><use href="#i-chart"/></svg>Админка</button>
 </nav>
 <div class="toast" id="toast"></div>
 
@@ -256,7 +312,7 @@ function show(id) {
   const prev = document.getElementById(cur), next = document.getElementById(id);
   if (prev !== next) { prev.classList.remove('on'); next.scrollTop = 0; next.classList.add('on'); }
   cur = id;
-  const main = ['home', 'services', 'profile'].includes(id);
+  const main = ['home', 'services', 'profile', 'admin'].includes(id);
   document.getElementById('tabbar').classList.toggle('hide', !main);
   if (tg) main ? tg.BackButton.hide() : tg.BackButton.show();
 }
@@ -302,7 +358,7 @@ function levels() {
 function gift() {
   haptic(); const l = D.levels[0];
   page(`<span class="label">Практика в подарок</span><h1>Заземление</h1><p>${l.practice}</p><p class="mantra" style="margin-top:22px">${l.mantra}</p>
-    <div class="stack"><button class="btn" data-go="quiz">Пройти волновой чекап</button><button class="btn line" data-svc="practices">Все практики Ольги</button></div>`);
+    <div class="stack"><button class="btn" onclick="breathe()">Начать: минута дыхания</button><button class="btn line" data-go="quiz">Пройти волновой чекап</button><button class="btn text" data-svc="practices">Все практики Ольги ${arrow}</button></div>`);
 }
 function invite() {
   haptic(); const link = user ? 'https://t.me/' + D.bot + '?start=ref_' + user.id : 'https://t.me/' + D.bot;
@@ -339,6 +395,7 @@ function result(fresh) {
   try { localStorage.setItem('checkup', JSON.stringify({scores, weak})); } catch (e) {}
   const el = document.getElementById('result');
   el.innerHTML = `<div class="page in"><span class="label">Волновой чекап</span><h1>Ваш результат</h1></div>
+    <div class="wave">${waveSvg(weak)}</div>
     <div class="levels in" style="--d:.05s">${D.levels.map((l, i) =>
       `<div class="lv${i === weak ? ' weak' : ''}"><span>${l.name}</span><div class="track"><i data-w="${scores[i]}"></i></div><em>${scores[i]}%</em></div>`).join('')}</div>
     <div class="facts in" style="--d:.15s"><div><span class="label">Больше всего сил</span><h3>${D.levels[strong].name}</h3></div><div><span class="label">Уходит энергия</span><h3 style="color:var(--weak)">${W.name}</h3></div></div>
@@ -346,8 +403,8 @@ function result(fresh) {
     <div class="block in" style="--d:.25s"><span class="label">Ваша вычетка</span><p class="mantra">${W.mantra}</p></div>
     <div class="block in" style="--d:.3s"><span class="label">Практика на сегодня</span><p>${W.practice}</p></div>
     <div class="block in" style="--d:.35s"><span class="label">Дальше</span><p>В полном чекапе по фото Ольга лично посмотрит все семь уровней и подберёт для вас вычетку, аудиотрек и практику.</p>
-      <div class="stack"><button class="btn" onclick="send({a:'done',s:scores,full:1},'full')">Записаться на полный чекап</button>
-      <button class="btn line" onclick="send({a:'done',s:scores},'done')">Сохранить результат в чат</button>
+      <div class="stack"><button class="btn" onclick="send({a:'done',s:scores,full:1},'full_'+digits())">Записаться на полный чекап</button>
+      <button class="btn line" onclick="send({a:'done',s:scores},'done_'+digits())">Сохранить результат в чат</button>
       <button class="btn text" onclick="levels()">Следующие уровни ${arrow}</button></div></div>`;
   show('result');
   setTimeout(() => el.querySelectorAll('.track i').forEach((b, i) => setTimeout(() => b.style.width = b.dataset.w + '%', i * 70)), 250);
@@ -359,6 +416,94 @@ function renderMine(weak) {
     <div class="item plain" data-go="quiz"><b>Пройти заново</b><span class="r">${arrow}</span><small>Через две-четыре недели, чтобы увидеть изменения</small></div>`;
 }
 renderMine();
+
+const digits = () => scores.map(v => String(v / 10)).join('');
+
+// «волна»: семь уровней на круговой диаграмме
+function waveSvg(weak) {
+  const c = 150, R = 104, pts = (r, i) => [c + r * Math.sin(i / 7 * 2 * Math.PI), c - r * Math.cos(i / 7 * 2 * Math.PI)];
+  const ring = k => D.levels.map((_, i) => pts(R * k, i).join(',')).join(' ');
+  const shape = scores.map((v, i) => pts(R * v / 100, i).join(',')).join(' ');
+  const labels = D.levels.map((l, i) => { const [x, y] = pts(R + 22, i);
+    return `<text x="${x}" y="${y + 4}" text-anchor="middle" class="${i === weak ? 'weak' : ''}">${l.name}</text>`; }).join('');
+  return `<svg viewBox="0 0 300 300">${[.33, .66, 1].map(k => `<polygon class="grid" points="${ring(k)}"/>`).join('')}
+    ${D.levels.map((_, i) => `<line class="grid" x1="${c}" y1="${c}" x2="${pts(R, i)[0]}" y2="${pts(R, i)[1]}"/>`).join('')}
+    <polygon class="shape f" points="${shape}"/>${labels}</svg>`;
+}
+
+// послание дня: вычетки меняются каждый день
+(function daily() {
+  const day = Math.floor(Date.now() / 864e5), l = D.levels[day % 7];
+  const date = new Date().toLocaleDateString('ru-RU', {day: 'numeric', month: 'long'});
+  document.getElementById('daily').innerHTML = `<span class="label">Послание на ${date}</span><p class="mantra">${l.mantra}</p>
+    <div class="meta"><span>Уровень «${l.name}»</span><span>Практика ${arrow}</span></div>`;
+  document.getElementById('daily').onclick = () => { haptic(); page(`<span class="label">Послание дня</span><h1>${l.name}</h1><p class="mantra">${l.mantra}</p>
+    <div class="block" style="padding:26px 0 0"><span class="label">Практика</span><p>${l.practice}</p></div>
+    <div class="stack"><button class="btn" onclick="breathe()">Минута дыхания</button><button class="btn line" data-go="quiz">Пройти волновой чекап</button></div>`); };
+})();
+
+// отсчёт до ярмарки (20 ноября, 10:00 по Москве)
+(function countdown() {
+  const end = Date.parse('2026-11-20T10:00:00+03:00'), el = document.getElementById('count');
+  const tick = () => {
+    let s = Math.max(0, Math.floor((end - Date.now()) / 1000));
+    if (!s) { el.innerHTML = '<div><b>Идёт</b><span>ярмарка</span></div>'; return; }
+    const d = Math.floor(s / 86400), h = Math.floor(s % 86400 / 3600), m = Math.floor(s % 3600 / 60);
+    el.innerHTML = [[d, 'дн'], [h, 'ч'], [m, 'мин']].map(([v, u]) => `<div><b>${String(v).padStart(2, '0')}</b><span>${u}</span></div>`).join('');
+  };
+  tick(); setInterval(tick, 30000);
+})();
+
+// минута дыхания: 4 секунды вдох, 4 выдох
+let breathT;
+function breathe() {
+  haptic(); show('breath'); const orb = document.getElementById('orb'), tx = document.getElementById('btext'), tm = document.getElementById('btimer');
+  let left = 60, phase = 0; clearInterval(breathT);
+  const step = () => { phase = 1 - phase; orb.classList.toggle('inhale', !!phase); tx.textContent = phase ? 'Вдох' : 'Выдох'; try { tg && tg.HapticFeedback.selectionChanged(); } catch (e) {} };
+  setTimeout(step, 600);
+  breathT = setInterval(() => {
+    left--; tm.textContent = '00:' + String(left).padStart(2, '0');
+    if (left % 4 === 0) step();
+    if (left <= 0) { clearInterval(breathT); orb.classList.remove('inhale'); tx.textContent = 'Хорошо'; try { tg && tg.HapticFeedback.notificationOccurred('success'); } catch (e) {} }
+  }, 1000);
+}
+function stopBreath() { clearInterval(breathT); back(); }
+
+// фото в шапке плывёт медленнее страницы
+const heroImg = document.querySelector('.hero img');
+document.getElementById('home').addEventListener('scroll', e => { heroImg.style.transform = 'translateY(' + e.target.scrollTop * .35 + 'px)'; }, {passive: true});
+
+// админка: бот передаёт снимок статистики в адресе (#admin=...)
+(function admin() {
+  const m = location.hash.match(/admin=([\w-]+)/); if (!m) return;
+  let A; try { const b = m[1].replace(/-/g, '+').replace(/_/g, '/'); A = JSON.parse(new TextDecoder().decode(Uint8Array.from(atob(b + '='.repeat((4 - b.length % 4) % 4)), c => c.charCodeAt(0)))); } catch (e) { return; }
+  document.getElementById('admintab').hidden = false;
+  const T = A.t, pct = (a, b) => b ? Math.round(a / b * 100) : 0;
+  const when = s => new Date(s * 1000).toLocaleString('ru-RU', {day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit'});
+  const funnel = [['Зашли в бота', T.users], ['Прошли чекап', T.done], ['Оставили заявку', T.leads]];
+  document.getElementById('admin').innerHTML = `<div class="page"><span class="label">Обновлено ${when(A.at)}</span><h1>Админка</h1>
+      <p class="muted">Чтобы обновить цифры, отправьте боту /panel</p></div>
+    <div class="kpi">${[['Зашли в бота', T.users], ['Прошли чекап', T.done], ['Заявки', T.leads], ['Вступили в канал', T.joins]]
+      .map(([k, v]) => `<div><b data-n="${v}">0</b><small>${k}</small></div>`).join('')}</div>
+    <div class="section"><span class="label">Воронка</span><div class="funnel">${funnel.map(([k, v]) =>
+      `<div class="fstep"><span>${k}</span><span class="muted">${v} · ${pct(v, T.users)}%</span><div class="track"><i data-w="${pct(v, T.users)}"></i></div></div>`).join('')}</div></div>
+    <div class="section"><span class="label">Откуда пришли</span><div class="table">
+      <div class="tr th"><b>Метка</b><span>Бот</span><span>Чек</span><span>Заяв</span><span>Канал</span></div>
+      ${A.src.map(r => `<div class="tr"><b>${r.name}</b><span>${r.users}</span><span>${r.done}</span><span>${r.leads}</span><span>${r.joins}</span></div>`).join('')}</div></div>
+    ${A.refs.length ? `<div class="section"><span class="label">Лучше всех приглашают</span><div class="list">${A.refs.map(r => `<div class="item plain"><b>${r.n}</b><span class="r">${r.c}</span></div>`).join('')}</div></div>` : ''}
+    <div class="section"><span class="label">Последние заявки</span><div class="list">${A.recent.length ? A.recent.map(r =>
+      `<div class="item plain"><b>${r.k}</b><span class="r">${when(r.at)}</span><small>${r.n}${r.u ? ' · @' + r.u : ''} · ${r.s}</small></div>`).join('')
+      : '<div class="item plain"><b>Пока нет</b></div>'}</div></div>
+    <div class="section"><span class="label">Ссылки для учёта</span><div class="list">${A.links.map(l =>
+      `<div class="item plain"><b>${l.name}</b><span class="r"><span class="copy" onclick="copy('${l.bot}')">бот</span>${l.ch ? `<span class="copy" onclick="copy('${l.ch}')">канал</span>` : ''}</span><small>${l.ch ? 'бот и канал' : 'только бот'}</small></div>`).join('')}
+      <div class="item plain"><b>Новая ссылка</b><small>Отправьте боту: /link insta_olga</small></div></div></div>`;
+  tab('admin');
+  setTimeout(() => {
+    document.querySelectorAll('#admin [data-n]').forEach(e => { const to = +e.dataset.n; let v = 0; const s = setInterval(() => { v = Math.min(to, v + Math.max(1, Math.ceil(to / 20))); e.textContent = v; if (v >= to) clearInterval(s); }, 30); });
+    document.querySelectorAll('#admin .track i').forEach(i => i.style.width = i.dataset.w + '%');
+  }, 300);
+})();
+function copy(t) { haptic(); try { navigator.clipboard.writeText(t); toast('Ссылка скопирована'); } catch (e) { toast(t); } }
 </script>
 </body>
 </html>
